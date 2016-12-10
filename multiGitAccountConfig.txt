@@ -1,0 +1,13 @@
+#cat config
+# Default GitHub
+Host github.com
+        HostName github.com
+        User git
+        IdentityFile ~/.ssh/id_rsa
+
+# My Persosonal account
+Host github-shuvo
+        HostName github.com
+        User git
+        IdentityFile ~/.ssh/id_rsa_shuvo
+
