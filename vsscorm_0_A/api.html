@@ -29,9 +29,19 @@ Boston, MA	02110-1301, USA.
 */
 
 // ------------------------------------------
+//   SCORM RTE Functions - Initialization
+// ------------------------------------------
+function FindAPI(myString) { 
+    console.log('FindAPI. Hey! What\'s up man');
+    console.log(myString);
+}
+
+// ------------------------------------------
 //	 SCORM RTE Functions - Initialization
 // ------------------------------------------
 function LMSInitialize(dummyString) { 
+    console.log('LMSInitialize. Hey! What\'s up man');
+    console.log(dummyString);
 	return "true";
 }
 
@@ -39,6 +49,8 @@ function LMSInitialize(dummyString) {
 //	 SCORM RTE Functions - Getting and Setting Values
 // ------------------------------------------
 function LMSGetValue(varname) {
+    console.log('LMSGetValue. Hey! What\'s up man');
+    console.log(varname);
 
 	// create request object 
 	var req = createRequest();
@@ -62,7 +74,11 @@ function LMSGetValue(varname) {
 
 }
 
-function LMSSetValue(varname,varvalue) {
+function LMSSetValue(varname, varvalue) {
+    console.log('LMSSetValue. Hey! What\'s up man');
+    console.log(varname);
+    
+    console.log(varvalue);
 
 	// create request object
 	var req = createRequest();
@@ -93,6 +109,8 @@ function LMSSetValue(varname,varvalue) {
 }
 
 function LMSCommit(dummyString) {
+    console.log('LMSCommit. Hey! What\'s up man');
+    console.log(dummyString);
 	LMSGetValue('');
 	return "true";
 }
@@ -101,6 +119,8 @@ function LMSCommit(dummyString) {
 //	 SCORM RTE Functions - Closing The Session
 // ------------------------------------------
 function LMSFinish(dummyString) {
+    console.log('LMSFinish. Hey! What\'s up man');
+    console.log(dummyString);
 	LMSGetValue('');
 	return "true";
 }
@@ -109,14 +129,17 @@ function LMSFinish(dummyString) {
 //	 SCORM RTE Functions - Error Handling
 // ------------------------------------------
 function LMSGetLastError() {
+    console.log('LMSGetLastError. Hey! What\'s up man');
 	return 0;
 }
 
 function LMSGetDiagnostic(errorCode) {
+    console.log('LMSGetDiagnostic. Hey! What\'s up man');
 	return "diagnostic string";
 }
 
 function LMSGetErrorString(errorCode) {
+    console.log('LMSGetErrorString. Hey! What\'s up man');
 	return "error string";
 }
 
@@ -124,6 +147,8 @@ function LMSGetErrorString(errorCode) {
 //	 Other Functions incl. AJAX Request Handling
 // ------------------------------------------
 function createRequest() {
+    console.log('createRequest. Hey! What\'s up man');
+
 	var request;
 	try {
 		request = new XMLHttpRequest();
