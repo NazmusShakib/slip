@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="refresh" content="1;url=https://app.sticklar.com" />
+
+        <title>Redirecting to https://app.sticklar.com</title>
+    </head>
+    <body>
+        Redirecting to <a href="https://app.sticklar.com">https://app.sticklar.com</a>.
+    </body>
+</html>
