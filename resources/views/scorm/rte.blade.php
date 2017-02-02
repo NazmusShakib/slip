@@ -37,7 +37,7 @@
 @endif
 
 <div class="intrinsic-container">
-    <iframe src="{{asset('scorm/api.html')}}" name="API" noresize style="display: none"></iframe>
+    <iframe src="{{asset('scorm/api.html')}}" name="API" noresize></iframe>
 
     <iframe src="{{asset("unzipCourse/$lessonFolderName/KE_Orientation3.htm")}}" name="course" allowfullscreen></iframe>
 </div>

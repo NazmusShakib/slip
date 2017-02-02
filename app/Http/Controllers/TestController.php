@@ -92,7 +92,7 @@ class TestController extends Controller
 
     public function getScormApiJs()
     {
-        return view('scorm.api');
+        return view('scorm/api');
     }
 
     private function unZip($zipFilePath, $extractToThisPath)

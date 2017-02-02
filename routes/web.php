@@ -35,6 +35,16 @@ Route::get('api-js', [
     'uses' => 'TestController@getScormApiJs',
 ]);
 
+Route::get('get-value', [
+    'as' => 'get.value',
+    'uses' => 'TestController@getValue',
+]);
+
+Route::get('set-value', [
+    'as' => 'set.value',
+    'uses' => 'TestController@setValue',
+]);
+
 Route::post('fileDesc', [
     'as' => 'fileDesc',
     'uses' => 'TestController@showUploadFile'
