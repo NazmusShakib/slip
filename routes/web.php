@@ -30,6 +30,11 @@ Route::get('read/{id}', [
     'uses' => 'TestController@getContent',
 ]);
 
+Route::get('api-js', [
+    'as' => 'api.js',
+    'uses' => 'TestController@getScormApiJs',
+]);
+
 Route::post('fileDesc', [
     'as' => 'fileDesc',
     'uses' => 'TestController@showUploadFile'

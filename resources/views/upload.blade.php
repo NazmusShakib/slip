@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Scorm</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+            crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -75,5 +78,21 @@
 
     </div>
 </div>
+
+
+<script>
+    $(document).ready(function() {
+
+        $('input[type=file]').change(function () {
+            var val = $(this).val().toLowerCase();
+            var regex = new RegExp("(.*?)\.(zip)$");
+            if (!(regex.test(val))) {
+                $(this).val('');
+                alert('Please select a .zip file format.');
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

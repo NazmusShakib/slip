@@ -1,14 +1,17 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>VS SCORM - RTE API</title>
-
+    <title>VS SCORM - RTE Frameset</title>
     <script language="javascript">
 
         /*
 
          VS SCORM - RTE API FOR SCORM 1.2
-         Rev 1.0 - Sunday, May 31, 2009
+         Rev 2.0 - Monday, June 15, 2009
          Copyright (C) 2009, Addison Robson LLC
 
          This program is free software; you can redistribute it and/or
@@ -18,42 +21,45 @@
 
          This program is distributed in the hope that it will be useful,
          but WITHOUT ANY WARRANTY; without even the implied warranty of
-         MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+         MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
          GNU General Public License for more details.
 
          You should have received a copy of the GNU General Public License
          along with this program; if not, write to the Free Software
          Foundation, Inc., 51 Franklin Street, Fifth Floor,
-         Boston, MA  02110-1301, USA.
+         Boston, MA	02110-1301, USA.
 
          */
-
-        var debug = true;
 
         // ------------------------------------------
         //   SCORM RTE Functions - Initialization
         // ------------------------------------------
+        function FindAPI(myString) {
+            console.log('FindAPI. Hey! What\'s up man');
+            console.log(myString);
+        }
+
+        // ------------------------------------------
+        //	 SCORM RTE Functions - Initialization
+        // ------------------------------------------
         function LMSInitialize(dummyString) {
-            if (debug) { alert('*** LMSInitialize ***'); }
+            console.log('LMSInitialize. Hey! What\'s up man');
+            console.log(dummyString);
             return "true";
         }
 
         // ------------------------------------------
-        //   SCORM RTE Functions - Getting and Setting Values
+        //	 SCORM RTE Functions - Getting and Setting Values
         // ------------------------------------------
         function LMSGetValue(varname) {
-            /*  if (debug) {
-             alert('*** LMSGetValue varname='+varname
-             +' varvalue=value ***');
-             }
-             return "value";*/
+            console.log('LMSGetValue. Hey! What\'s up man');
+            console.log(varname);
 
             // create request object
             var req = createRequest();
 
             // set up request parameters - uses GET method
-            req.open('GET','getValue.php?varname='+urlencode(varname)
-                    +'&code='+Math.random(),false);
+            req.open('GET','getValue.php?varname='+urlencode(varname)+'&code='+Math.random(),false);
 
             // submit to the server for processing
             req.send(null);
@@ -68,28 +74,26 @@
             else {
                 return req.responseText;
             }
+
         }
 
-        function LMSSetValue(varname,varvalue) {
-            /*  if (debug) {
-             alert('*** LMSSetValue varname='+varname
-             +' varvalue='+varvalue+' ***');
-             }
-             return "true";*/
+        function LMSSetValue(varname, varvalue) {
+            console.log('LMSSetValue. Hey! What\'s up man');
+            console.log(varname);
+
+            console.log(varvalue);
 
             // create request object
             var req = createRequest();
 
-            // set up request parameters - uses combined GET and POST
-            req.open('POST','setValue.php?varname='+urlencode(varname)
-                    +'&code='+Math.random(),false);
+            // set up request parameters - uses combined GET and POST methods
+            req.open('POST','setValue.php?varname='+urlencode(varname)+'&code='+Math.random(),false);
 
             // send header information along with the POST data
             var params = 'varvalue='+urlencode(varvalue);
-            req.setRequestHeader("Content-type",
-                    "application/x-www-form-urlencoded");
-            req.setRequestHeader("Content-length", params.length);
-            req.setRequestHeader("Connection", "close");
+            req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            //req.setRequestHeader("Content-length", params.length);
+            //req.setRequestHeader("Connection", "close");
 
             // submit to the server for processing
             req.send(params);
@@ -104,84 +108,69 @@
             else {
                 return "true";
             }
+
         }
 
         function LMSCommit(dummyString) {
-            if (debug) { alert('*** LMSCommit ***'); }
+            console.log('LMSCommit. Hey! What\'s up man');
+            console.log(dummyString);
+            LMSGetValue('');
             return "true";
         }
 
         // ------------------------------------------
-        //   SCORM RTE Functions - Closing The Session
+        //	 SCORM RTE Functions - Closing The Session
         // ------------------------------------------
         function LMSFinish(dummyString) {
-            if (debug) { alert('*** LMSFinish ***'); }
+            console.log('LMSFinish. Hey! What\'s up man');
+            console.log(dummyString);
+            LMSGetValue('');
             return "true";
         }
 
         // ------------------------------------------
-        //   SCORM RTE Functions - Error Handling
+        //	 SCORM RTE Functions - Error Handling
         // ------------------------------------------
         function LMSGetLastError() {
-            if (debug) { alert('*** LMSGetLastError ***'); }
+            console.log('LMSGetLastError. Hey! What\'s up man');
             return 0;
         }
 
         function LMSGetDiagnostic(errorCode) {
-            if (debug) {
-                alert('*** LMSGetDiagnostic errorCode='+errorCode+' ***');
-            }
+            console.log('LMSGetDiagnostic. Hey! What\'s up man');
             return "diagnostic string";
         }
 
         function LMSGetErrorString(errorCode) {
-            if (debug) {
-                alert('*** LMSGetErrorString errorCode='+errorCode+' ***');
-            }
+            console.log('LMSGetErrorString. Hey! What\'s up man');
             return "error string";
         }
 
-
-        // Step 6 – Creating the AJAX Requests
-
+        // ------------------------------------------
+        //	 Other Functions incl. AJAX Request Handling
+        // ------------------------------------------
         function createRequest() {
+            console.log('createRequest. Hey! What\'s up man');
 
-            // this is the object that we're going to (try to) create
             var request;
-
-            // does the browser have native support for
-            // the XMLHttpRequest object
             try {
                 request = new XMLHttpRequest();
             }
-
-                    // it failed so it's likely to be Internet Explorer which
-                    // uses a different way to do this
             catch (tryIE) {
-
-                // try to see if it's a newer version of Internet Explorer
                 try {
                     request = new ActiveXObject("Msxml2.XMLHTTP");
                 }
-
-                        // that didn't work so ...
                 catch (tryOlderIE) {
-
-                    // maybe it's an older version of Internet Explorer
                     try {
                         request = new ActiveXObject("Microsoft.XMLHTTP");
                     }
-
-                            // even that didn't work (sigh)
                     catch (failed) {
                         alert("Error creating XMLHttpRequest");
                     }
-
                 }
             }
             return request;
         }
-
 
         function urlencode( str ) {
             //
@@ -268,7 +257,7 @@
 
             for (unicodeStr in histogram) {
                 hexEscStr = histogram[unicodeStr];
-                ret = replacer(unicodeStr, hexEscStr, ret);
+                ret = replacer(unicodeStr, hexEscStr, ret); // Custom replace. No regexing
             }
 
             // Uppercase for full PHP compatibility

@@ -6,6 +6,7 @@ use Chumper\Zipper\Facades\Zipper;
 use App\Scormvar;
 use ZipArchive;
 use File;
+use Validator;
 
 use Illuminate\Http\Request;
 
@@ -14,6 +15,16 @@ class TestController extends Controller
 
     public function uploadSCORMZipFile(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'zip' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
         $file = $request->file('zip');
 
         $request->file('zip')->move(
@@ -41,6 +52,47 @@ class TestController extends Controller
     public function getContent($lessonFolderName)
     {
         return view('scorm.rte', compact('lessonFolderName'));
+    }
+
+    public function getValue(Request $request)
+    {
+        //$safevarname = $_REQUEST['varname'];
+        $safeVarName = $request->varname;
+
+        $varValue = Scormvar::where('varName', $safeVarName)
+            ->select('varValue')
+            ->first();
+
+        // return value to the calling program
+        print $varValue;
+    }
+
+    public function setValue(Request $request)
+    {
+
+// read GET and POST variables
+/*        $varname = $_REQUEST['varname'];
+        $varvalue = $_REQUEST['varvalue'];*/
+
+        $safeVarName = $request->varname;
+        $safeVarValue = $request->varvalue;
+
+        // Remove previous data.
+        $deletedRows = Scormvar::where('varName', $safeVarName)->delete();
+
+        $saveData = new Scormvar();
+        $saveData->varName = $safeVarName;
+        $saveData->varValue = $safeVarValue;
+        $saveData->save();
+
+        // return value to the calling program
+        print "true";
+    }
+
+
+    public function getScormApiJs()
+    {
+        return view('scorm.api');
     }
 
     private function unZip($zipFilePath, $extractToThisPath)

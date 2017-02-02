@@ -22,7 +22,7 @@
 
         .intrinsic-container iframe {
             position: absolute;
-            top:0;
+            top: 0;
             left: 0;
             width: 90%;
             height: 90%;
@@ -32,14 +32,19 @@
 
 <body>
 
-    @if(Session::has('msg'))
-        {{ Session::get('msg') }}
-    @endif
+@if(Session::has('msg'))
+    {{ Session::get('msg') }}
+@endif
 
-    <div class="intrinsic-container">
-        <iframe src="/scorm/api.html" name="API" noresize style="display: none"></iframe>
-        <iframe src="/unzipCourse/{{$lessonFolderName}}/KE_Orientation121212.htm" name="course" allowfullscreen></iframe>
-    </div>
+<div class="intrinsic-container">
+    <iframe src="{{asset('scorm/api.html')}}" name="API" noresize style="display: none"></iframe>
+
+    <iframe src="{{asset("unzipCourse/$lessonFolderName/KE_Orientation3.htm")}}" name="course" allowfullscreen></iframe>
+</div>
+
+
+
+
 
 </body>
 
