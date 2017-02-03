@@ -50,7 +50,7 @@ class TestController extends Controller
         if (!File::glob($extractToThisPath . '/imsmanifest.xml') && !File::glob($extractToThisPath . '/metadata.xml')) {
             File::cleanDirectory($extractToThisPath, true);
             rmdir($extractToThisPath);
-            return redirect()->back()->with('msg', 'This isNot a SCORM file.');
+            return redirect()->back()->with('msg', 'IsNot a SCORM file.');
         }
 
         return redirect()->route('get.content', $lessonFolderName);
@@ -58,7 +58,12 @@ class TestController extends Controller
 
     public function getContent($lessonFolderName)
     {
-        return view('scorm.rte', compact('lessonFolderName'));
+        $lessonPath = $extractToThisPath = public_path() . '/unzipCourse/' . $lessonFolderName;
+        $dir_list = File::glob($lessonPath . '/*.htm', GLOB_MARK);
+        $arr = explode("/", $dir_list[0]);
+        $getHTMlaunchingFile = end($arr);
+
+        return view('scorm.rte', ['launchingFile' => $getHTMlaunchingFile, 'lessonPath' => $lessonFolderName ]);
     }
 
     public function getValue(Request $request)

@@ -36,10 +36,11 @@
     {{ Session::get('msg') }}
 @endif
 
+
 <div class="intrinsic-container">
     <iframe src="{{asset('scorm/api.html')}}" name="API" noresize></iframe>
 
-    <iframe src="{{asset("unzipCourse/$lessonFolderName/KE_Orientation3.htm")}}" name="course" allowfullscreen></iframe>
+    <iframe src="{{asset("unzipCourse/$lessonPath/$launchingFile")}}" name="course" allowfullscreen></iframe>
 </div>
 
 </body>
