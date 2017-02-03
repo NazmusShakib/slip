@@ -26,7 +26,6 @@ class TestController extends Controller
         }
 
         $file = $request->file('zip');
-
         $request->file('zip')->move(
             public_path() . '/tempZip/', $file->getClientOriginalName()
         );
@@ -46,6 +45,12 @@ class TestController extends Controller
             @unlink($zipFilePath);
             $request->session()->flash('msg', 'Extraction Failed!');
             return redirect()->back();
+        }
+
+        if (!File::glob($extractToThisPath . '/imsmanifest.xml') && !File::glob($extractToThisPath . '/metadata.xml')) {
+            File::cleanDirectory($extractToThisPath, true);
+            rmdir($extractToThisPath);
+            return redirect()->back()->with('msg', 'This isNot a SCORM file.');
         }
 
         return redirect()->route('get.content', $lessonFolderName);
@@ -95,18 +100,10 @@ class TestController extends Controller
     {
         $zip = new ZipArchive();
         $res = $zip->open($zipFilePath);
-
         if ($res === TRUE) {
             $zip->extractTo($extractToThisPath);
             $zip->close();
-
-            $xml_files = File::glob($extractToThisPath . '/*.xml');
-            if (!File::glob($extractToThisPath . '/imsmanifest.xml') && !File::glob($extractToThisPath . '/metadata.xml')) {
-                File::cleanDirectory($extractToThisPath, true);
-                rmdir($extractToThisPath);
-            } else {
-                return true;
-            }
+            return true;
         }
         return false;
     }
