@@ -49,3 +49,8 @@ Route::post('fileDesc', [
     'as' => 'fileDesc',
     'uses' => 'TestController@showUploadFile'
 ]);
+
+Route::get('search', [
+    'as' => 'search',
+    'uses' => 'TestController@searchFile',
+    ]);

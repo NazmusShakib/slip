@@ -43,7 +43,9 @@ class TestController extends Controller
             @unlink($zipFilePath);
             $request->session()->flash('msg', 'Files Extracted Successfully!');
         } else {
+            @unlink($zipFilePath);
             $request->session()->flash('msg', 'Extraction Failed!');
+            return redirect()->back();
         }
 
         return redirect()->route('get.content', $lessonFolderName);
@@ -56,7 +58,6 @@ class TestController extends Controller
 
     public function getValue(Request $request)
     {
-        //$safevarname = $_REQUEST['varname'];
         $safeVarName = $request->varname;
 
         $varValue = Scormvar::where('varName', $safeVarName)
@@ -69,11 +70,6 @@ class TestController extends Controller
 
     public function setValue(Request $request)
     {
-
-// read GET and POST variables
-/*        $varname = $_REQUEST['varname'];
-        $varvalue = $_REQUEST['varvalue'];*/
-
         $safeVarName = $request->varname;
         $safeVarValue = $request->varvalue;
 
@@ -97,21 +93,45 @@ class TestController extends Controller
 
     private function unZip($zipFilePath, $extractToThisPath)
     {
-        //$zipFilePath = public_path().'\testZip\test.zip';
-        //$extractToThisPath = public_path() . '\testZipExtract';
-        File::cleanDirectory($extractToThisPath, true);
-
         $zip = new ZipArchive();
         $res = $zip->open($zipFilePath);
 
         if ($res === TRUE) {
             $zip->extractTo($extractToThisPath);
             $zip->close();
-            return true;
-        } else {
-            return false;
+
+            $xml_files = File::glob($extractToThisPath . '/*.xml');
+            if (!File::glob($extractToThisPath . '/imsmanifest.xml') && !File::glob($extractToThisPath . '/metadata.xml')) {
+                File::cleanDirectory($extractToThisPath, true);
+                rmdir($extractToThisPath);
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public function searchFile(/*$dir, $searchPattern*/)
+    {
+        $dir = public_path() . '/unzipCourse/lesson';
+        $searchPattern = '/*.xml';
+
+
+        $log_files = File::glob($dir . $searchPattern);
+
+        echo "<pre>";
+        print_r($log_files);
+        echo "</pre>";
+        exit();
+
+        if ($log_files === false) {
+            echo 'nai ra vi';
         }
     }
+
+
+    // Test functions
 
 
     public function downloadZip()

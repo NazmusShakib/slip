@@ -42,10 +42,6 @@
     <iframe src="{{asset("unzipCourse/$lessonFolderName/KE_Orientation3.htm")}}" name="course" allowfullscreen></iframe>
 </div>
 
-
-
-
-
 </body>
 
 </html>
