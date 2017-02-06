@@ -58,12 +58,12 @@ class TestController extends Controller
 
     public function getContent($lessonFolderName)
     {
-        $lessonPath = $extractToThisPath = public_path() . '/unzipCourse/' . $lessonFolderName;
+        /*$lessonPath = $extractToThisPath = public_path() . '/unzipCourse/' . $lessonFolderName;
         $dir_list = File::glob($lessonPath . '/*.htm', GLOB_MARK);
         $arr = explode("/", $dir_list[0]);
-        $getHTMlaunchingFile = end($arr);
+        $getHTMlaunchingFile = end($arr);*/
 
-        return view('scorm.rte', ['launchingFile' => $getHTMlaunchingFile, 'lessonPath' => $lessonFolderName ]);
+        return view('scorm.rte'/*, ['launchingFile' => $getHTMlaunchingFile, 'lessonPath' => $lessonFolderName ]*/);
     }
 
     public function getValue(Request $request)

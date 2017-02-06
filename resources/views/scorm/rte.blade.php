@@ -37,11 +37,10 @@
 ?>
 
 
-<div class="intrinsic-container" onbeforeunload="API.LMSFinish('');"
-     onunload="API.LMSFinish('');">
-    <iframe src="@include ('scorm.api')" name="API" noresize></iframe>
+<div class="intrinsic-container">
+    <iframe src="{{ asset('scorm/api.html') }}" name="API" noresize></iframe>
 
-    <iframe src="<?php echo asset("unzipCourse/$lessonPath/$launchingFile"); ?>" name="course" allowfullscreen></iframe>
+    <iframe src="{{ asset("unzipCourse/507297/KE_Orientation44343434343.htm") }}" name="course" allowfullscreen></iframe>
 </div>
 
 </body>
