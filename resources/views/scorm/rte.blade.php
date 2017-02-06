@@ -32,15 +32,16 @@
 
 <body>
 
-@if(Session::has('msg'))
-    {{ Session::get('msg') }}
-@endif
+<?php if(Session::has('msg'))
+    echo Session::get('msg');
+?>
 
 
-<div class="intrinsic-container">
-    <iframe src="{{asset('scorm/api.html')}}" name="API" noresize></iframe>
+<div class="intrinsic-container" onbeforeunload="API.LMSFinish('');"
+     onunload="API.LMSFinish('');">
+    <iframe src="@include ('scorm.api')" name="API" noresize></iframe>
 
-    <iframe src="{{asset("unzipCourse/$lessonPath/$launchingFile")}}" name="course" allowfullscreen></iframe>
+    <iframe src="<?php echo asset("unzipCourse/$lessonPath/$launchingFile"); ?>" name="course" allowfullscreen></iframe>
 </div>
 
 </body>
