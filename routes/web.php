@@ -40,7 +40,7 @@ Route::get('get-value', [
     'uses' => 'TestController@getValue',
 ]);
 
-Route::get('set-value', [
+Route::post('set-value', [
     'as' => 'set.value',
     'uses' => 'TestController@setValue',
 ]);
@@ -54,3 +54,13 @@ Route::get('search', [
     'as' => 'search',
     'uses' => 'TestController@searchFile',
 ]);
+
+Route::get('loadSCO', [
+    'as' => 'loadSCO',
+    'uses' => 'TestController@loadSCO',
+]);
+
+Route::get('pip', function(){
+
+    return view('pipwerks.pip1');
+});

@@ -56,13 +56,16 @@
         // ------------------------------------------
         function LMSGetValue(varname) {
             console.log('LMSGetValue. Hey! What\'s up man');
-            console.log(varname);
+            console.log(varname+'aa');
 
             // create request object
             var req = createRequest();
 
+
+
+
             // set up request parameters - uses GET method
-            req.open('GET','get-value?varname='+urlencode(varname)+'&code='+Math.random(),false);
+            req.open('GET','/get-value?varname='+urlencode(varname)+'&code='+Math.random(),false);
 
             // submit to the server for processing
             req.send(null);
@@ -90,7 +93,7 @@
             var req = createRequest();
 
             // set up request parameters - uses combined GET and POST methods
-            req.open('POST','set-value?varname='+urlencode(varname)+'&code='+Math.random(),false);
+            req.open('POST','/set-value?varname='+urlencode(varname)+'&code='+Math.random(),false);
 
             // send header information along with the POST data
             var params = 'varvalue='+urlencode(varvalue);

@@ -78,6 +78,11 @@ class TestController extends Controller
         print $varValue;
     }
 
+    public function loadSCO()
+    {
+        return view('scorm.loadSCO');
+    }
+
     public function setValue(Request $request)
     {
         $safeVarName = $request->varname;
