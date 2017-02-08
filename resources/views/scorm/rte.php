@@ -36,17 +36,15 @@
 
     <script>
 
-        //$(document).ready(function() {
+       /* $(document).ready(function() {
 
-            /*$('#API').ready(function() {
-                setTimeout("$('#course').attr('src', 'http://localhost:8080/unzipCourse/cap12/KE_Orientation22.htm')", 4000);
-            });*/
+            $('#API').ready(function() {
+                setTimeout("$('#course').attr('src', '/unzipCourse/lesson/KE_Orientation3.htm')", 4000);
+            });
 
-            //api.LMSInitialize('');
-
-            //setTimeout("API.LMSFinish('+s+');", 5000);
-        //});
-
+            setTimeout("API.LMSFinish('+s+');", 5000);
+        });
+*/
     </script>
 
 </head>
@@ -56,7 +54,8 @@
 <div class="intrinsic-container">
 
     <iframe src="<?php echo  asset('scorm/api.html'); ?>" id="API" name="API"  noresize></iframe>
-    <iframe src="http://localhost:8080/unzipCourse/cap12/KE_Orientation22.htm" name="SCO" id="course" allowfullscreen></iframe>
+    <iframe src="/unzipCourse/cap12/KE_Orientation22.htm" name="SCO" id="course" allowfullscreen></iframe>
+
 
 </div>
 
