@@ -1,26 +1,37 @@
 <?php
-$f = 'myfile.txt';
-$t = 'time.txt';
-if(!file_exists($f))
-$handle = fopen($f, 'w') or die('Cannot open file:  '.$f);
-if(!file_exists($t))
-$handle = fopen($t, 'w') or die('Cannot open file:  '.$t);
 
-$dateFormat = "F d Y H:i:s"; // "D d M Y g:i A"
+class checkFile {
+	private $f = 'myfile.txt';
+	private $t = 'time.txt';
+	private $dateFormat = "F d Y H:i:s"; // "D d M Y g:i A"
+	private $mtime = '';
 
-//$atime = fileatime($f);
-//$ctime = filectime($f);
-$mtime = filemtime($f);
+	function __construct() {
+		if(!file_exists($this->f))
+		$handle = fopen($this->f, 'w') or die('Cannot open file:  '.$this->f);
+		if(!file_exists($this->t))
+		$handle = fopen($this->t, 'w') or die('Cannot open file:  '.$this->t);
+		$this->mtime = filemtime($this->f);
+	}
 
-$file_handle = fopen($t, "r");
-while (!feof($file_handle)) {
-	$line = fgets($file_handle);
+	private function getLastModTime($t) {
+		$file_handle = fopen($t, "r");
+		while (!feof($file_handle)) {
+			return $line = fgets($file_handle);
+		}
+	}
+
+	public function getResult() {
+		if ($this->getLastModTime($this->t) != $this->mtime) {
+		  echo "$this->f was modified! At: ".date($this->dateFormat, $this->mtime);
+		  $file_handle = fopen($this->t, 'w');
+			fwrite($file_handle, $this->mtime);
+			fclose($file_handle);
+		} else {
+			echo "$this->f Not modified! Last Time: ".date($this->dateFormat, $this->getLastModTime($this->t));
+		}
+	}
 }
-if ($line != $mtime) {
-  echo "$f was modified! At: ".date($dateFormat, $mtime);
-  $file_handle = fopen($t, 'w');
-	fwrite($file_handle, $mtime);
-	fclose($file_handle);
-} else {
-	echo "$f Not modified! Last Time: ".date($dateFormat, $line);
-}
+
+$checkFile = new checkFile();
+$checkFile->getResult();
